@@ -1,0 +1,37 @@
+.item_entry .entry_form_item {
+   float:left;
+}
+.clear {
+   clear:both;
+   float:none;
+}
+.todo_items ul{
+   padding:0;
+   margin:0;
+}
+.todo_items ul li {
+   margin:.125em 0 .5em 0;
+   padding:.125em 0 0 0;
+   border-top:1px solid #ccc;
+   list-style:none;
+   display:block;
+   word-wrap: break-word;
+   text-wrap: suppress;
+}
+
+.todo_items {
+   padding-top:1em;
+}
+
+.item_entry input {
+   border:1px solid #eee;
+   display:block;
+   width:99%;
+}
+
+.toRight{
+    text-align:right;
+}
+
+body h1 {font-size:200%;}
+body h2 {font-size:150%;}

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <title>YUI ToDo</title>
+   <!-- Start apple iPhone specific stuff -->
+   <meta name="viewport" content="user-scalable=no, width=device-width"/>
+   <meta name="apple-mobile-web-app-capable" content="yes" />
+   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+   <link rel="apple-touch-icon" href="icon.png"/>
+   <link rel="apple-touch-startup-image" href="startup.png" />
+   <!-- End apple iPhone specific stuff -->
+   <link rel="stylesheet" href="base.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body class="yui-skin-sam yui3-cssgrids">
+   <div id="doc" class="yui3-d0">
+      <div class="yui-t4"> <!-- change class to change preset -->
+         <div class="yui-main">
+            <div class="yui-b">
+               <div class="header">
+                  <h1>ToDo App</h1>
+                  <div class="item_entry">
+                     <form class="entry_form">
+                        <input type="text" name="todo_item_input" class="todo_item_input">
+                        <p class="toRight"><a class="addItem" href="javascript:void(0);">Add</a></p>
+                     </form>
+                  </div>
+               </div>
+               <div class="todo_items clear">
+                  <h2>Todo Items</h2>
+                  <ul>
+                     <li class="no_items">No Items</li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="yui-b"></div>
+      </div>
+      
+   </div>
+   <!-- Initialization process //-->
+   <script src="yui-min.js"></script>
+   <script src="base.js"></script>
+</body>
+</html>
+
+
