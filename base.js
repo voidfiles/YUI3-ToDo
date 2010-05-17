@@ -1,6 +1,7 @@
 (function(){
     var YUI_ONLINE_CONF = {
-            combine:0
+            combine:0,
+	    base:"yui3/build/"
         },
         YUI_OFFLINE_CONF = {
             base: "/",
