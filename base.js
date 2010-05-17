@@ -19,8 +19,20 @@
         CURRENT_CONF = YUI_OFFLINE_CONF;
     }
     CURRENT_CONF = YUI_OFFLINE_CONF;
-        
-        
+    
+    
+    cacheWhatWhat(e){
+        console.log("event", e);
+    }
+    
+    cache = window.applicationCache;
+
+    cache.addEventListener('updateready', cacheWhatWhat, false);
+    cache.addEventListener('error', cacheWhatWhat, false);
+    cache.addEventListener('update', cacheWhatWhat, false);
+    cache.addEventListener('downloading', cacheWhatWhat, false);
+    cache.addEventListener('progress', cacheWhatWhat, false);
+    cache.addEventListener('cached', cacheWhatWhat, false);
 
     
     YUI(CURRENT_CONF).use('cssreset','cssgrids','gallery-storage-lite','node','console', function (Y) {
