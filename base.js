@@ -1,26 +1,24 @@
 (function(){
-    var YUI_ONLINE_CONF = {
-            combine:0,
-	    base:"yui3/build/"
-        },
+    var YUI_ONLINE_CONF = {},
         YUI_OFFLINE_CONF = {
-            base: "/",
+            base: "yui3/build/",
             combine:0,
             groups: {
                 gallery: {
-                    base:'../../../yui3-gallery/build/',
+                    base:'yui3-gallery/build/',
                     patterns:  { 'gallery-': {} }
                 }
             }
         },
         ONLINE = navigator.onLine,
         CURRENT_CONF;
-        
-        if(ONLINE){
-            CURRENT_CONF = YUI_ONLINE_CONF;
-        } else {
-            CURRENT_CONF = YUI_OFFLINE_CONF;
-        }
+    
+    if(ONLINE){
+        CURRENT_CONF = YUI_ONLINE_CONF;
+    } else {
+        CURRENT_CONF = YUI_OFFLINE_CONF;
+    }
+    CURRENT_CONF = YUI_OFFLINE_CONF;
         
         
 
