@@ -1,3 +1,9 @@
+CACHE MANIFEST
+
+
+# Bumping the manifest
+
+
 index.html
 base.css
 base.js
@@ -8,6 +14,7 @@ yui3/build/cssgrids/grids-min.css
 yui3/build/widget/assets/skins/sam/widget.css
 yui3/build/console/assets/skins/sam/console.css
 yui3-gallery/build/gallery-storage-lite/gallery-storage-lite-min.js
+yui3/build/loader/loader-min.js
 yui3/build/oop/oop-min.js
 yui3/build/dom/dom-min.js
 yui3/build/event-custom/event-custom-min.js

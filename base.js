@@ -20,6 +20,20 @@
     }
     CURRENT_CONF = YUI_OFFLINE_CONF;
         
+    if(!!window.applicationCache){
+
+    cacheWhatWhat = function(e){
+      console.log("event", e);
+    }
+		    
+    cache = window.applicationCache;
+
+    cache.addEventListener('updateready', cacheWhatWhat, false);
+    cache.addEventListener('error', cacheWhatWhat, false);
+    cache.addEventListener('downloading', cacheWhatWhat, false);
+    cache.addEventListener('progress', cacheWhatWhat, false);
+    cache.addEventListener('cached', cacheWhatWhat, false);
+    }
         
 
     
