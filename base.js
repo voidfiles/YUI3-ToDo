@@ -4,7 +4,13 @@
         },
         YUI_OFFLINE_CONF = {
             base: "/",
-            combine:0
+            combine:0,
+            groups: {
+                gallery: {
+                    base:'../../../yui3-gallery/build/',
+                    patterns:  { 'gallery-': {} }
+                }
+            }
         },
         ONLINE = navigator.onLine,
         CURRENT_CONF;
