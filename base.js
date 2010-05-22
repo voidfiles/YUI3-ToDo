@@ -1,5 +1,5 @@
 (function(){
-    var DEBUG = 1,
+    var DEBUG = 0,
         YUI_ONLINE_CONF = {
             debug:DEBUG
         },
@@ -85,6 +85,7 @@
             function autoCheckForUpdates(){
                 setInterval(function(){cache.update();}, 10000);
             }
+	    autoCheckForUpdates();
         }
     });
     
