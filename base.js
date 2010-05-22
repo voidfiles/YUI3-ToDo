@@ -49,10 +49,11 @@
                         message = "An error has occured, check your manifest.";
                         break;
                     default:
-                        messsage = "A " + type + " event has occured";
+                        messsage = "A " + e  + " event has occured";
                         break;
 
                 }
+		console.log(e);
                 message = "[cacheEventHandler] " + message;
                 
                 Y.log(message);
