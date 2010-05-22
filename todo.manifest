@@ -1,0 +1,37 @@
+CACHE MANIFEST
+
+
+# Bumping the manifest
+
+
+index.html
+base.css
+base.js
+yui-min.js
+yui3/build/cssreset/reset-min.css
+yui3/build/cssfonts/fonts-min.css
+yui3/build/cssgrids/grids-min.css
+yui3/build/widget/assets/skins/sam/widget.css
+yui3/build/console/assets/skins/sam/console.css
+yui3-gallery/build/gallery-storage-lite/gallery-storage-lite-min.js
+yui3/build/loader/loader-min.js
+yui3/build/oop/oop-min.js
+yui3/build/dom/dom-min.js
+yui3/build/event-custom/event-custom-min.js
+yui3/build/event/event-base-min.js
+yui3/build/pluginhost/pluginhost-min.js
+yui3/build/node/node-min.js
+yui3/build/event/event-delegate-min.js
+yui3/build/intl/intl-min.js
+yui3/build/console/lang/console.js
+yui3/build/attribute/attribute-min.js
+yui3/build/event/event-focus-min.js
+yui3/build/base/base-min.js
+yui3/build/classnamemanager/classnamemanager-min.js
+yui3/build/widget/widget-min.js
+yui3/build/substitute/substitute-min.js
+yui3/build/console/console-min.js
+yui3/build/json/json-min.js
+
+startup.png
+icon.png

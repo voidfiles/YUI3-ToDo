@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<html manifest="todo.manifest">
 <head>
    <title>YUI ToDo</title>
    <!-- Start apple iPhone specific stuff -->
@@ -25,10 +25,10 @@
                      </form>
                   </div>
                </div>
-               <div class="todo_items clear">
+               <div class="todo_items">
                   <h2>Todo Items</h2>
                   <ul>
-                     <li class="no_items">Fetching Items...</li>
+                     <li class="no_items">Fetching ToDo Items ...</li>
                   </ul>
                </div>
             </div>
@@ -37,6 +37,7 @@
       </div>
       
    </div>
+   <div id="debug"></div>
    <!-- Initialization process //-->
    <script src="yui-min.js"></script>
    <script src="base.js"></script>

@@ -1,5 +1,8 @@
 (function(){
-    var YUI_ONLINE_CONF = {},
+    var DEBUG = 1,
+        YUI_ONLINE_CONF = {
+            debug:DEBUG
+        },
         YUI_OFFLINE_CONF = {
             base: "yui3/build/",
             combine:0,
@@ -8,7 +11,8 @@
                     base:'yui3-gallery/build/',
                     patterns:  { 'gallery-': {} }
                 }
-            }
+            },
+            debug:DEBUG
         },
         ONLINE = navigator.onLine,
         CURRENT_CONF;
@@ -18,21 +22,63 @@
     } else {
         CURRENT_CONF = YUI_OFFLINE_CONF;
     }
-    CURRENT_CONF = YUI_OFFLINE_CONF;
-    
-    
-    cacheWhatWhat(e){
-        console.log("event", e);
-    }
-    
-    cache = window.applicationCache;
 
-    cache.addEventListener('updateready', cacheWhatWhat, false);
-    cache.addEventListener('error', cacheWhatWhat, false);
-    cache.addEventListener('update', cacheWhatWhat, false);
-    cache.addEventListener('downloading', cacheWhatWhat, false);
-    cache.addEventListener('progress', cacheWhatWhat, false);
-    cache.addEventListener('cached', cacheWhatWhat, false);
+
+    YUI(CURRENT_CONF).use('console', function (Y) {
+        if(DEBUG){
+            new Y.Console({ logSource: Y.Global,style:"block" }).render("#debug");
+        }
+        
+        
+        if(!!window.applicationCache){
+            cache = window.applicationCache;
+            cacheEventHandler = function(e){
+                var type = e.type,
+                    this.calledUpdate = this.calledUpdate || false,
+                    this.cache = this.cache || cache,
+                    message;
+                    
+                switch(type){
+                    case "updateready":
+                        if(this.calledUpdate){
+                            this.cache.swapCache();
+                            this.calledUpdate = false;
+                            message = "Swapped the cache, now we probably need to reload.";
+                        } else {
+                            this.cache.update();
+                            message = "Called update now we need to wait for updateready again to swap the cache.";
+                        }
+                        break;
+                    case "error":
+                        message = "An error has occured, check your manifest.";
+                        break
+                    default:
+                        messsage = "A " + type + " event has occured";
+                        break;
+                        
+                }
+                
+                if(typeof Y.log !== "undefined"){
+                    Y.log(message);
+                } elseif(typeof console.log !== "undefined") {
+                    console.log(message)
+                }
+                
+                return message;
+            };
+		    
+            
+
+            cache.addEventListener('updateready', cacheEventHandler, false);
+            cache.addEventListener('error', cacheEventHandler, false);
+            cache.addEventListener('downloading', cacheEventHandler, false);
+            cache.addEventListener('progress', cacheEventHandler, false);
+            cache.addEventListener('cached', cacheEventHandler, false);
+        }
+        Y.log("testing");
+    });
+    
+        
 
     
     YUI(CURRENT_CONF).use('cssreset','cssgrids','gallery-storage-lite','node','console', function (Y) {
@@ -40,7 +86,8 @@
        // For full compatibility with IE 6-7 and Safari 3.x, you should listen for
        // the storage-lite:ready event before making storage calls. If you're not
        // targeting those browsers, you can safely ignore this step.
-
+       
+       Y.log("testing 2");
        var ToDo = {
            // A place to store the todo items
            items: [],
@@ -63,7 +110,7 @@
                    state:"todo"
                });
                
-               console.log(this.items);
+               Y.log(this.items);
                todo_input.set("value","");
                this.saveItems();
                this.renderItems();
@@ -81,15 +128,15 @@
                    new_string;
 
                for(b in classNames){
-                   console.log("index of",classNames[b].indexOf("item__") );
+                   Y.log("index of",classNames[b].indexOf("item__") );
                    if( classNames[b].indexOf("item__") != -1){
                        new_string = classNames[b].replace("item__","");
-                       console.log("matching class_name", new_string);
+                       Y.log("matching class_name", new_string);
                        index = parseInt(new_string,10);
                    }
                }
-               console.log("index",index);
-               console.log(this.items);
+               Y.log("index",index);
+               Y.log(this.items);
                this.items[index].state = "done";
                this.saveItems();
                this.renderItems();
@@ -104,11 +151,11 @@
                    className;
                    
                e.preventDefault();
-               console.log(e);
-               console.log("classNames",classNames);
+               Y.log(e);
+               Y.log("classNames",classNames);
                while(classNamesLength--){
                    className = classNames[classNamesLength];
-                   console.log(className);
+                   Y.log(className);
                    switch (className) {
                        case "entry_form":
                        case "addItem":
