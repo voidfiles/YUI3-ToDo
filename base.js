@@ -1,5 +1,5 @@
 (function(){
-    var DEBUG = 1,
+    var DEBUG = 0,
         YUI_ONLINE_CONF = {
             debug:DEBUG
         },
@@ -14,36 +14,30 @@
             },
             debug:DEBUG
         },
-        ONLINE = navigator.onLine,
-        CURRENT_CONF;
-    
-    if(ONLINE){
-        CURRENT_CONF = YUI_ONLINE_CONF;
-    } else {
-        CURRENT_CONF = YUI_OFFLINE_CONF;
-    }
+        ONLINE = (navigator.online) ? true : false; 
+        CURRENT_CONF = (ONLINE) ? YUI_ONLINE_CONF : YUI_OFFLINE_CONF;
+        
 
 
     YUI(CURRENT_CONF).use('console', function (Y) {
         if(DEBUG){
             new Y.Console({ logSource: Y.Global,style:"block" }).render("#debug");
-        }
-        
-        
+        }    
         if(!!window.applicationCache){
-            cache = window.applicationCache;
+            var cache = window.applicationCache;
             cacheEventHandler = function(e){
                 var type = e.type,
                     this.calledUpdate = this.calledUpdate || false,
                     this.cache = this.cache || cache,
                     message;
-                    
+
                 switch(type){
                     case "updateready":
                         if(this.calledUpdate){
                             this.cache.swapCache();
                             this.calledUpdate = false;
-                            message = "Swapped the cache, now we probably need to reload.";
+                            location.reload();
+                            message = "Swapped the cache, now we need to reload.";
                         } else {
                             this.cache.update();
                             message = "Called update now we need to wait for updateready again to swap the cache.";
@@ -55,19 +49,15 @@
                     default:
                         messsage = "A " + type + " event has occured";
                         break;
-                        
+
                 }
+                message = "[cacheEventHandler] " + message;
                 
-                if(typeof Y.log !== "undefined"){
-                    Y.log(message);
-                } elseif(typeof console.log !== "undefined") {
-                    console.log(message)
-                }
-                
-                return message;
+                Y.log(message);
+                return true;
             };
-		    
-            
+
+
 
             cache.addEventListener('updateready', cacheEventHandler, false);
             cache.addEventListener('error', cacheEventHandler, false);
@@ -75,7 +65,6 @@
             cache.addEventListener('progress', cacheEventHandler, false);
             cache.addEventListener('cached', cacheEventHandler, false);
         }
-        Y.log("testing");
     });
     
         
@@ -87,7 +76,6 @@
        // the storage-lite:ready event before making storage calls. If you're not
        // targeting those browsers, you can safely ignore this step.
        
-       Y.log("testing 2");
        var ToDo = {
            // A place to store the todo items
            items: [],
@@ -110,7 +98,6 @@
                    state:"todo"
                });
                
-               Y.log(this.items);
                todo_input.set("value","");
                this.saveItems();
                this.renderItems();
@@ -151,8 +138,6 @@
                    className;
                    
                e.preventDefault();
-               Y.log(e);
-               Y.log("classNames",classNames);
                while(classNamesLength--){
                    className = classNames[classNamesLength];
                    Y.log(className);
@@ -198,36 +183,7 @@
 
        };
        
-       Y.StorageLite.on('storage-lite:ready', function () {
-           ToDo.init();
-          /*
-          // To store an item, pass a key and a value (both strings) to setItem().
-          Y.StorageLite.setItem('kittens', 'fluffy and cute');
-
-          // If you set the optional third parameter to true, you can use any
-          // serializable object as the value and it will automatically be stored
-          // as a JSON string.
-          Y.StorageLite.setItem('pies', ['apple', 'pumpkin', 'pecan'], true);
-
-          // To retrieve an item, pass the key to getItem().
-          console.log(Y.StorageLite.getItem('kittens'));    // => 'fluffy and cute'
-
-          // To retrieve and automatically parse a JSON value, set the optional
-          // second parameter to true.
-          console.log(Y.StorageLite.getItem('pies', true)); // => ['apple', 'pumpkin', 'pecan']
-
-          // The length() method returns a count of how many items are currently
-          // stored.
-          console.log(Y.StorageLite.length()); // => 2
-
-          // To remove a single item, pass its key to removeItem().
-          Y.StorageLite.removeItem('kittens');
-
-          // To remove all items in storage, call clear().
-          Y.StorageLite.clear();
-          */
-
-       });
+       Y.StorageLite.on('storage-lite:ready', function () { ToDo.init();});
     });
     
 })();
