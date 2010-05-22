@@ -10,15 +10,8 @@
                 }
             }
         },
-        ONLINE = navigator.onLine,
-        CURRENT_CONF;
-    
-    if(ONLINE){
-        CURRENT_CONF = YUI_ONLINE_CONF;
-    } else {
-        CURRENT_CONF = YUI_OFFLINE_CONF;
-    }
-    CURRENT_CONF = YUI_OFFLINE_CONF;
+        ONLINE = (navigator.online) ? true : false; 
+        CURRENT_CONF = (ONLINE) ? YUI_ONLINE_CONF : YUI_OFFLINE_CONF;
         
     if(!!window.applicationCache){
 
