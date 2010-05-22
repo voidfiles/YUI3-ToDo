@@ -1,5 +1,5 @@
 (function(){
-    var DEBUG = 0,
+    var DEBUG = 1,
         YUI_ONLINE_CONF = {
             debug:DEBUG
         },
