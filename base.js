@@ -1,5 +1,5 @@
 (function(){
-    var DEBUG = 0,
+    var DEBUG = 1,
         YUI_ONLINE_CONF = {
             debug:DEBUG
         },
@@ -22,6 +22,7 @@
     YUI(CURRENT_CONF).use('console', function (Y) {
         var calledUpdate = false,
             cache;
+            
         if(DEBUG){
             new Y.Console({ logSource: Y.Global,style:"block" }).render("#debug");
         }
@@ -34,13 +35,13 @@
 
                 switch(type){
                     case "updateready":
-                        if(this.calledUpdate){
-                            this.cache.swapCache();
-                            this.calledUpdate = false;
+                        if(calledUpdate){
+                            cache.swapCache();
+                            calledUpdate = false;
                             location.reload();
                             message = "Swapped the cache, now we need to reload.";
                         } else {
-                            this.cache.update();
+                            cache.update();
                             message = "Called update now we need to wait for updateready again to swap the cache.";
                         }
                         break;
