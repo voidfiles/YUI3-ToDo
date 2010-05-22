@@ -20,15 +20,16 @@
 
 
     YUI(CURRENT_CONF).use('console', function (Y) {
+        var calledUpdate = false,
+            cache;
         if(DEBUG){
             new Y.Console({ logSource: Y.Global,style:"block" }).render("#debug");
-        }    
+        }
+        
         if(!!window.applicationCache){
-            var cache = window.applicationCache;
+            cache = window.applicationCache;
             cacheEventHandler = function(e){
                 var type = e.type,
-                    this.calledUpdate = this.calledUpdate || false,
-                    this.cache = this.cache || cache,
                     message;
 
                 switch(type){
@@ -45,7 +46,7 @@
                         break;
                     case "error":
                         message = "An error has occured, check your manifest.";
-                        break
+                        break;
                     default:
                         messsage = "A " + type + " event has occured";
                         break;
