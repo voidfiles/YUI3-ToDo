@@ -115,15 +115,11 @@
                    new_string;
 
                for(b in classNames){
-                   Y.log("index of",classNames[b].indexOf("item__") );
                    if( classNames[b].indexOf("item__") != -1){
                        new_string = classNames[b].replace("item__","");
-                       Y.log("matching class_name", new_string);
                        index = parseInt(new_string,10);
                    }
                }
-               Y.log("index",index);
-               Y.log(this.items);
                this.items[index].state = "done";
                this.saveItems();
                this.renderItems();
@@ -140,7 +136,6 @@
                e.preventDefault();
                while(classNamesLength--){
                    className = classNames[classNamesLength];
-                   Y.log(className);
                    switch (className) {
                        case "entry_form":
                        case "addItem":
