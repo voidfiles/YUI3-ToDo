@@ -1,11 +1,9 @@
 CACHE MANIFEST
 
 
-# Bumping the manifest version 2
+# Bumping the manifest version 3 
 
 index.html
-base.css
-base.js
 yui-min.js
 yui3/build/cssreset/reset-min.css
 yui3/build/cssfonts/fonts-min.css
@@ -31,6 +29,9 @@ yui3/build/widget/widget-min.js
 yui3/build/substitute/substitute-min.js
 yui3/build/console/console-min.js
 yui3/build/json/json-min.js
+
+base.css
+base.js
 
 startup.png
 icon.png
