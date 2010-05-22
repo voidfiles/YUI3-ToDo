@@ -19,54 +19,72 @@
         
 
 
-    YUI(CURRENT_CONF).use('console', function (Y) {
-        var calledUpdate = false,
-            cache;
-            
+    YUI(CURRENT_CONF).use('console', function (Y) {            
         if(DEBUG){
             new Y.Console({ logSource: Y.Global,style:"block" }).render("#debug");
         }
         
         if(!!window.applicationCache){
-            cache = window.applicationCache;
-            cacheEventHandler = function(e){
-                var type = e.type,
-                    message;
-
-                switch(type){
-                    case "updateready":
-                        if(calledUpdate){
-                            cache.swapCache();
-                            calledUpdate = false;
-                            location.reload();
-                            message = "Swapped the cache, now we need to reload.";
-                        } else {
-                            cache.update();
-                            message = "Called update now we need to wait for updateready again to swap the cache.";
-                        }
-                        break;
-                    case "error":
-                        message = "An error has occured, check your manifest.";
-                        break;
-                    default:
-                        messsage = "A " + e  + " event has occured";
-                        break;
-
-                }
-		console.log(e);
-                message = "[cacheEventHandler] " + message;
+            // Code from Johnathen Stark
+            // Convenience array of status values
+            var cacheStatusValues = [],
+                cache = window.applicationCache;
                 
+                
+            cacheStatusValues[0] = 'uncached';
+            cacheStatusValues[1] = 'idle';
+            cacheStatusValues[2] = 'checking';
+            cacheStatusValues[3] = 'downloading';
+            cacheStatusValues[4] = 'updateready';
+            cacheStatusValues[5] = 'obsolete';
+
+            // Listeners for all possible events
+            cache.addEventListener('cached', logEvent, false);
+            cache.addEventListener('checking', logEvent, false);
+            cache.addEventListener('downloading', logEvent, false);
+            cache.addEventListener('error', logEvent, false);
+            cache.addEventListener('noupdate', logEvent, false);
+            cache.addEventListener('obsolete', logEvent, false);
+            cache.addEventListener('progress', logEvent, false);
+            cache.addEventListener('updateready', logEvent, false);
+
+            // Log every event to the console
+            function logEvent(e) {
+                var online, status, type, message;
+                online = (isOnline()) ? 'yes' : 'no';
+                status = cacheStatusValues[cache.status];
+                type = e.type;
+                message = 'online: ' + online;
+                message+= ', event: ' + type;
+                message+= ', status: ' + status;
+                if (type == 'error' && navigator.onLine) {
+                    message+= ' There was an unknown error, check your Cache Manifest.';
+                }
                 Y.log(message);
-                return true;
-            };
+            }
+            
+            function isOnline() {
+                return navigator.onLine;
+            }
 
+            // Swap in newly download files when update is ready
+            cache.addEventListener('updateready', function(e){
+                    // Don't perform "swap" if this is the first cache
+                    if (cacheStatusValues[cache.status] != 'idle') {
+                        cache.swapCache();
+			location.reload();
+                        Y.log('Swapped/updated the Cache Manifest.');
+                    }
+                }
+            , false);
 
-
-            cache.addEventListener('updateready', cacheEventHandler, false);
-            cache.addEventListener('error', cacheEventHandler, false);
-            cache.addEventListener('downloading', cacheEventHandler, false);
-            cache.addEventListener('progress', cacheEventHandler, false);
-            cache.addEventListener('cached', cacheEventHandler, false);
+            // These two functions check for updates to the manifest file
+            function checkForUpdates(){
+                cache.update();
+            }
+            function autoCheckForUpdates(){
+                setInterval(function(){cache.update();}, 10000);
+            }
         }
     });
     
