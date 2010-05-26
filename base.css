@@ -4,6 +4,12 @@
    width:99%;
 }
 
+.header a.callout {
+  position:absolute;
+  top:1px;
+  right:1px;
+}
+
 .todo_items {
    padding-top:1em;
 }
