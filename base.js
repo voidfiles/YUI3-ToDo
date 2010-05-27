@@ -28,7 +28,7 @@
             },
             debug:DEBUG
         },
-        ONLINE = (!!navigator.online) ? ((navigator.online) ? true : false) : true; 
+        ONLINE = (!!navigator.online) ? ((navigator.online) ? true : false) : false; 
         CURRENT_CONF = (ONLINE) ? YUI_ONLINE_CONF : YUI_OFFLINE_CONF;
         
 
