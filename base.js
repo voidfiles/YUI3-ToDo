@@ -28,7 +28,7 @@
             },
             debug:DEBUG
         },
-        ONLINE = (navigator.online) ? true : false; 
+        ONLINE = (!!navigator.online) ? ((navigator.online) ? true : false) : true; 
         CURRENT_CONF = (ONLINE) ? YUI_ONLINE_CONF : YUI_OFFLINE_CONF;
         
 
@@ -102,9 +102,7 @@
                     function(){
                         try{
                             cache.update();
-                        } catch (err){
-                            var b;
-                        };
+                        } catch (err){};
                     }, 
                     10000
                 );
