@@ -11,36 +11,35 @@
    <!-- End apple iPhone specific stuff -->
    <link rel="stylesheet" href="base.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
-<body class="yui-skin-sam yui3-cssgrids">
-   <div id="doc" class="yui3-d0">
-      <div class="yui-t4"> <!-- change class to change preset -->
-         <div class="yui-main">
-            <div class="yui-b">
-               <div class="header">
-                  <h1>ToDo App</h1>
-                  <div class="item_entry">
-                     <form class="entry_form">
-                        <input type="text" name="todo_item_input" class="todo_item_input">
-                        <p class="toRight"><a class="addItem" href="javascript:void(0);">Add</a></p>
-                     </form>
-                  </div>
-               </div>
-               <div class="todo_items">
-                  <h2>Todo Items</h2>
-                  <ul>
-                     <li class="no_items">Fetching ToDo Items ...</li>
-                  </ul>
-               </div>
+<body class="yui-skin-sam">
+    <div id="doc3"> <!-- change class to change preset -->
+        <div class="hd">
+            <h1>ToDo App</h1>
+            <a class="callout" href="http://alexkessinger.net">by Alex Kessinger</a>
+            <div class="item_entry">
+                <form class="entry_form">
+                    <input type="text" name="todo_item_input" class="todo_item_input">
+                    <p class="toRight"><a class="addItem" href="javascript:void(0);">Add</a></p>
+                </form>
             </div>
-         </div>
-         <div class="yui-b"></div>
-      </div>
-      
-   </div>
-   <div id="debug"></div>
-   <!-- Initialization process //-->
-   <script src="yui-min.js"></script>
-   <script src="base.js"></script>
+        </div>
+        <div class="bd">   
+            <div class="yui-main">
+                <div class="yui-b">
+                    <div class="todo_items">
+                        <h2>Todo Items</h2>
+                        <ul>
+                            <li class="no_items">Fetching ToDo Items ...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="debug"></div>
+        <!-- Initialization process //-->
+        <script src="yui-min.js"></script>
+        <script src="base.js"></script>
+    </div>
 </body>
 </html>
 
