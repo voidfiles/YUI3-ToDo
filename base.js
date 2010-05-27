@@ -37,7 +37,6 @@
         if(DEBUG){
             new Y.Console({ logSource: Y.Global,style:"block" }).render("#debug");
         }
-        
         if(!!window.applicationCache){
             // Code from Johnathen Stark
             // Convenience array of status values
@@ -73,6 +72,7 @@
             function isOnline() {
                 return navigator.onLine;
             }
+
             cache.addEventListener('cached', logEvent, false);
             cache.addEventListener('checking', logEvent, false);
             cache.addEventListener('downloading', logEvent, false);
@@ -177,16 +177,20 @@
                    classNamesLength = classNames.length,
                    className;
                    
-               e.preventDefault();
+               
                while(classNamesLength--){
                    className = classNames[classNamesLength];
                    switch (className) {
                        case "entry_form":
                        case "addItem":
+                           e.preventDefault();
                            this.addItem();
                            break;
                        case "done":
+                           e.preventDefault();
                            this.finishItem(target);
+                           break;
+                       case "callout":
                            break;
 
                    }
