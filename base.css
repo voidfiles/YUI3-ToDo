@@ -1,7 +1,7 @@
 .item_entry input {
-   border:1px solid #eee;
+   border:1px solid #ccc;
    display:block;
-   width:99%;
+   width:100%;
 }
 
 .header a.callout {
@@ -36,6 +36,11 @@
     text-align:left;
     margin-left:10px;
 }
-
+.hd .callout {
+    display:block;
+    position:absolute;
+    right:2px;
+    top:2px;
+}
 body h1 {font-size:200%;}
 body h2 {font-size:150%;}

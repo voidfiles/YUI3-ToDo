@@ -10,11 +10,25 @@
                 gallery: {
                     base:'yui3-gallery/build/',
                     patterns:  { 'gallery-': {} }
+                },
+                yui2: {
+                    base: '2in3/dist/2.8.0/build/',
+                    patterns:  { 
+                        'yui2-': {
+                            configFn: function(me) {
+                                if(/-skin|reset|fonts|grids|base/.test(me.name)) {
+                                    me.type = 'css';
+                                    me.path = me.path.replace(/\.js/, '.css');
+                                    me.path = me.path.replace(/\/yui2-skin/, '/assets/skins/sam/yui2-skin');
+                                }
+                            }
+                        } 
+                    }
                 }
             },
             debug:DEBUG
         },
-        ONLINE = (navigator.online) ? true : false; 
+        ONLINE = (!!navigator.online) ? ((navigator.online) ? true : false) : true; 
         CURRENT_CONF = (ONLINE) ? YUI_ONLINE_CONF : YUI_OFFLINE_CONF;
         
 
@@ -39,14 +53,7 @@
             cacheStatusValues[5] = 'obsolete';
 
             // Listeners for all possible events
-            cache.addEventListener('cached', logEvent, false);
-            cache.addEventListener('checking', logEvent, false);
-            cache.addEventListener('downloading', logEvent, false);
-            cache.addEventListener('error', logEvent, false);
-            cache.addEventListener('noupdate', logEvent, false);
-            cache.addEventListener('obsolete', logEvent, false);
-            cache.addEventListener('progress', logEvent, false);
-            cache.addEventListener('updateready', logEvent, false);
+
 
             // Log every event to the console
             function logEvent(e) {
@@ -66,13 +73,20 @@
             function isOnline() {
                 return navigator.onLine;
             }
-
+            cache.addEventListener('cached', logEvent, false);
+            cache.addEventListener('checking', logEvent, false);
+            cache.addEventListener('downloading', logEvent, false);
+            cache.addEventListener('error', logEvent, false);
+            cache.addEventListener('noupdate', logEvent, false);
+            cache.addEventListener('obsolete', logEvent, false);
+            cache.addEventListener('progress', logEvent, false);
+            cache.addEventListener('updateready', logEvent, false);
             // Swap in newly download files when update is ready
             cache.addEventListener('updateready', function(e){
                     // Don't perform "swap" if this is the first cache
                     if (cacheStatusValues[cache.status] != 'idle') {
                         cache.swapCache();
-			location.reload();
+                        location.reload();
                         Y.log('Swapped/updated the Cache Manifest.');
                     }
                 }
@@ -83,7 +97,15 @@
                 cache.update();
             }
             function autoCheckForUpdates(){
-                setInterval(function(){cache.update();}, 10000);
+                
+                setInterval(
+                    function(){
+                        try{
+                            cache.update();
+                        } catch (err){};
+                    }, 
+                    10000
+                );
             }
 	    autoCheckForUpdates();
         }
@@ -92,7 +114,7 @@
         
 
     
-    YUI(CURRENT_CONF).use('cssreset','cssgrids','gallery-storage-lite','node','console', function (Y) {
+    YUI(CURRENT_CONF).use('cssreset','yui2-grids','gallery-storage-lite','node','console', function (Y) {
 
        // For full compatibility with IE 6-7 and Safari 3.x, you should listen for
        // the storage-lite:ready event before making storage calls. If you're not

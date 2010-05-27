@@ -2,13 +2,13 @@ CACHE MANIFEST
 
 
 # Bumping the manifest version 4 
-# 9 
+# 10 
 
 index.html
 yui-min.js
 yui3/build/cssreset/reset-min.css
 yui3/build/cssfonts/fonts-min.css
-yui3/build/cssgrids/grids-min.css
+2in3/dist/2.8.0/build/yui2-grids/yui2-grids-min.css
 yui3/build/widget/assets/skins/sam/widget.css
 yui3/build/console/assets/skins/sam/console.css
 yui3-gallery/build/gallery-storage-lite/gallery-storage-lite-min.js
