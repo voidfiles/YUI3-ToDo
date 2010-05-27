@@ -1,5 +1,5 @@
 (function(){
-    var DEBUG = 0,
+    var DEBUG = 1,
         YUI_ONLINE_CONF = {
             debug:DEBUG
         },
@@ -28,7 +28,7 @@
             },
             debug:DEBUG
         },
-        ONLINE = (!!navigator.online) ? ((navigator.online) ? true : false) : false; 
+        ONLINE = (!!navigator.online) ? ((navigator.online) ? true : false) : true; 
         CURRENT_CONF = (ONLINE) ? YUI_ONLINE_CONF : YUI_OFFLINE_CONF;
         
 
